@@ -5,11 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iglesia - Bienvenidos</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -18,52 +24,209 @@
 
     .contenedor {
       text-align: center;
-      background: white;
-      padding: 50px;
-      border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-      max-width: 600px;
+      background: #ffffff;
+      padding: 60px 50px;
+      border-radius: 15px;
+      box-shadow:
+              0 10px 40px rgba(0, 0, 0, 0.15),
+              0 0 0 3px #d4af37 inset;
+      max-width: 750px;
+      width: 100%;
     }
 
     h1 {
-      color: #667eea;
-      font-size: 2.5em;
-      margin-bottom: 30px;
+      color: #2c3e50;
+      font-size: 3em;
+      margin-bottom: 20px;
+      font-weight: normal;
+      letter-spacing: 2px;
+    }
+
+    .subtitulo {
+      color: #7f8c8d;
+      font-size: 1.2em;
+      margin-bottom: 40px;
+      font-style: italic;
     }
 
     #mensaje {
-      font-size: 1.5em;
-      color: #333;
-      margin: 40px 0;
-      min-height: 80px;
-      transition: opacity 0.5s ease;
+      font-size: 2em;
+      line-height: 1.5;
+      font-weight: bold;
+      color: #2c3e50;
+      margin: 50px 0;
+      min-height: 140px;
+      padding: 40px;
+      border-radius: 10px;
+      background: #f8f9fa;
+      border-left: 8px solid #d4af37;
+      border-right: 8px solid #d4af37;
+      box-shadow:
+              0 8px 25px rgba(0, 0, 0, 0.1),
+              inset 0 2px 4px rgba(212, 175, 55, 0.1);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.6s ease;
+    }
+
+    /* Efecto sutil de brillo */
+    #mensaje::before {
+      content: '"';
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      font-size: 4em;
+      color: #d4af37;
+      opacity: 0.2;
+      font-family: Georgia, serif;
+    }
+
+    #mensaje::after {
+      content: '"';
+      position: absolute;
+      bottom: 10px;
+      right: 20px;
+      font-size: 4em;
+      color: #d4af37;
+      opacity: 0.2;
+      font-family: Georgia, serif;
+    }
+
+    /* Animación suave de entrada */
+    .mensaje-activo {
+      animation: entradaSuave 0.8s ease-out;
+      box-shadow:
+              0 8px 25px rgba(0, 0, 0, 0.15),
+              inset 0 2px 4px rgba(212, 175, 55, 0.2),
+              0 0 30px rgba(212, 175, 55, 0.2);
+    }
+
+    @keyframes entradaSuave {
+      0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     .boton {
       display: inline-block;
-      padding: 20px 40px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 25px 60px;
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
       color: white;
       text-decoration: none;
-      border-radius: 50px;
-      font-size: 1.3em;
+      border-radius: 8px;
+      font-size: 1.6em;
       font-weight: bold;
-      transition: transform 0.3s ease;
-      box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(44, 62, 80, 0.3);
+      border: 3px solid #d4af37;
+      letter-spacing: 1px;
+      margin-top: 20px;
     }
 
     .boton:hover {
-      transform: scale(1.1);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(44, 62, 80, 0.4);
+      background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+      border-color: #f1c40f;
+    }
+
+    .boton:active {
+      transform: translateY(-1px);
+    }
+
+    /* Decoración sutil */
+    .decoracion {
+      color: #d4af37;
+      font-size: 2em;
+      margin: 20px 0;
+      opacity: 0.6;
+    }
+
+    /* Indicador de cambio */
+    .indicador {
+      margin-top: 30px;
+      font-size: 0.9em;
+      color: #95a5a6;
+      font-style: italic;
+    }
+
+    .puntos {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .punto {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #bdc3c7;
+      transition: all 0.3s ease;
+    }
+
+    .punto.activo {
+      background: #d4af37;
+      transform: scale(1.3);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .contenedor {
+        padding: 40px 25px;
+      }
+
+      h1 {
+        font-size: 2.2em;
+      }
+
+      #mensaje {
+        font-size: 1.5em;
+        padding: 30px 20px;
+        min-height: 120px;
+      }
+
+      .boton {
+        padding: 20px 40px;
+        font-size: 1.3em;
+      }
     }
   </style>
 </head>
 <body>
 <div class="contenedor">
-  <h1>✝️ Bienvenidos</h1>
+  <h1>✝ Bienvenidos</h1>
+  <p class="subtitulo">Un mensaje de fe y esperanza</p>
 
-  <div id="mensaje">Cargando mensaje...</div>
+  <div class="decoracion">❋ ❋ ❋</div>
 
-  <a href="/img/jovenes.jpeg" class="boton">👏 DIOS TE ENVIÓ ESTO</a>
+  <div id="mensaje">
+    <span>Cargando mensaje...</span>
+  </div>
+
+  <div class="puntos">
+    <div class="punto" data-index="0"></div>
+    <div class="punto" data-index="1"></div>
+    <div class="punto" data-index="2"></div>
+    <div class="punto" data-index="3"></div>
+    <div class="punto" data-index="4"></div>
+    <div class="punto" data-index="5"></div>
+
+  </div>
+
+  <div class="decoracion">❋ ❋ ❋</div>
+
+  <a href="/img/jovenes.jpeg" class="boton">
+    👏 DIOS TE ENVÌA ESTO
+  </a>
 </div>
 
 <script>
@@ -74,35 +237,52 @@
     "Bienvenido a nuestra familia en Cristo",
     "Todo lo puedo en Cristo que me fortalece",
     "Ven tal como eres, Dios te espera con los brazos abiertos",
-    "El Señor es mi pastor, nada me faltará"
+    "El Señor es mi pastor, nada me faltará",
   ];
 
   let indice = 0;
   const elementoMensaje = document.getElementById('mensaje');
+  const puntos = document.querySelectorAll('.punto');
+
+  function actualizarPuntos() {
+    puntos.forEach((punto, i) => {
+      if (i === indice) {
+        punto.classList.add('activo');
+      } else {
+        punto.classList.remove('activo');
+      }
+    });
+  }
 
   function cambiarMensaje() {
-    // Hacer fade out
+    // Remover clase de animación
+    elementoMensaje.classList.remove('mensaje-activo');
+
+    // Hacer fade out suave
     elementoMensaje.style.opacity = '0';
+    elementoMensaje.style.transform = 'translateY(20px)';
 
     setTimeout(() => {
       // Cambiar el mensaje
-      elementoMensaje.textContent = mensajes[indice];
+      elementoMensaje.querySelector('span').textContent = mensajes[indice];
+
+      // Actualizar indicadores
+      actualizarPuntos();
+
       indice = (indice + 1) % mensajes.length;
 
-      // Hacer fade in
+      // Hacer fade in con animación
       elementoMensaje.style.opacity = '1';
-    }, 500);
+      elementoMensaje.style.transform = 'translateY(0)';
+      elementoMensaje.classList.add('mensaje-activo');
+    }, 600);
   }
 
   // Mostrar primer mensaje
   cambiarMensaje();
 
-  // Cambiar mensaje cada 3 segundos
-  setInterval(cambiarMensaje, 7000);
+  // Cambiar mensaje cada 4 segundos (más tiempo para leer)
+  setInterval(cambiarMensaje, 6000);
 </script>
 </body>
-</html>
-
-
-
-
+</
