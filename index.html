@@ -71,7 +71,6 @@
       transition: all 0.6s ease;
     }
 
-    /* Efecto sutil de brillo */
     #mensaje::before {
       content: '"';
       position: absolute;
@@ -94,7 +93,6 @@
       font-family: Georgia, serif;
     }
 
-    /* Animación suave de entrada */
     .mensaje-activo {
       animation: entradaSuave 0.8s ease-out;
       box-shadow:
@@ -141,7 +139,6 @@
       transform: translateY(-1px);
     }
 
-    /* Decoración sutil */
     .decoracion {
       color: #d4af37;
       font-size: 2em;
@@ -149,7 +146,6 @@
       opacity: 0.6;
     }
 
-    /* Indicador de cambio */
     .indicador {
       margin-top: 30px;
       font-size: 0.9em;
@@ -178,7 +174,6 @@
       box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
     }
 
-    /* Responsive */
     @media (max-width: 600px) {
       .contenedor {
         padding: 40px 25px;
@@ -219,25 +214,24 @@
     <div class="punto" data-index="3"></div>
     <div class="punto" data-index="4"></div>
     <div class="punto" data-index="5"></div>
-
   </div>
+
 
   <div class="decoracion">❋ ❋ ❋</div>
 
-  <a href="/img/jovenes.jpeg" class="boton">
-    👏 DIOS TE ENVÌA ESTO
+  <a href="mensaje.html" class="boton">
+    👏 DIOS TE ENVIÓ ESTO
   </a>
 </div>
 
 <script>
-  // Array de mensajes
   const mensajes = [
     "Dios te ama y tiene un plan maravilloso para tu vida",
     "La fe mueve montañas - Mateo 17:20",
     "Bienvenido a nuestra familia en Cristo",
     "Todo lo puedo en Cristo que me fortalece",
     "Ven tal como eres, Dios te espera con los brazos abiertos",
-    "El Señor es mi pastor, nada me faltará",
+    "El Señor es mi pastor, nada me faltará"
   ];
 
   let indice = 0;
@@ -255,34 +249,22 @@
   }
 
   function cambiarMensaje() {
-    // Remover clase de animación
     elementoMensaje.classList.remove('mensaje-activo');
-
-    // Hacer fade out suave
     elementoMensaje.style.opacity = '0';
     elementoMensaje.style.transform = 'translateY(20px)';
 
     setTimeout(() => {
-      // Cambiar el mensaje
       elementoMensaje.querySelector('span').textContent = mensajes[indice];
-
-      // Actualizar indicadores
       actualizarPuntos();
-
       indice = (indice + 1) % mensajes.length;
-
-      // Hacer fade in con animación
       elementoMensaje.style.opacity = '1';
       elementoMensaje.style.transform = 'translateY(0)';
       elementoMensaje.classList.add('mensaje-activo');
     }, 600);
   }
 
-  // Mostrar primer mensaje
   cambiarMensaje();
-
-  // Cambiar mensaje cada 4 segundos (más tiempo para leer)
   setInterval(cambiarMensaje, 6000);
 </script>
 </body>
-</
+</html>
