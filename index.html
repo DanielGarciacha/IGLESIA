@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iglesia - Bienvenidos</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .contenedor {
+      text-align: center;
+      background: white;
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      max-width: 600px;
+    }
+
+    h1 {
+      color: #667eea;
+      font-size: 2.5em;
+      margin-bottom: 30px;
+    }
+
+    #mensaje {
+      font-size: 1.5em;
+      color: #333;
+      margin: 40px 0;
+      min-height: 80px;
+      transition: opacity 0.5s ease;
+    }
+
+    .boton {
+      display: inline-block;
+      padding: 20px 40px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-size: 1.3em;
+      font-weight: bold;
+      transition: transform 0.3s ease;
+      box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .boton:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+<div class="contenedor">
+  <h1>✝️ Bienvenidos</h1>
+
+  <div id="mensaje">Cargando mensaje...</div>
+
+  <a href="../Iglesia/img/jovenes.jpeg" class="boton">👏 DIOS TE ENVIO ESTO</a>
+</div>
+
+<script>
+  // Array de mensajes
+  const mensajes = [
+    "Dios te ama y tiene un plan maravilloso para tu vida",
+    "La fe mueve montañas - Mateo 17:20",
+    "Bienvenido a nuestra familia en Cristo",
+    "Todo lo puedo en Cristo que me fortalece",
+    "Ven tal como eres, Dios te espera con los brazos abiertos",
+    "El Señor es mi pastor, nada me faltará"
+  ];
+
+  let indice = 0;
+  const elementoMensaje = document.getElementById('mensaje');
+
+  function cambiarMensaje() {
+    // Hacer fade out
+    elementoMensaje.style.opacity = '0';
+
+    setTimeout(() => {
+      // Cambiar el mensaje
+      elementoMensaje.textContent = mensajes[indice];
+      indice = (indice + 1) % mensajes.length;
+
+      // Hacer fade in
+      elementoMensaje.style.opacity = '1';
+    }, 500);
+  }
+
+  // Mostrar primer mensaje
+  cambiarMensaje();
+
+  // Cambiar mensaje cada 3 segundos
+  setInterval(cambiarMensaje, 3000);
+</script>
+</body>
+</html>
