@@ -112,33 +112,6 @@
       }
     }
 
-    .boton {
-      display: inline-block;
-      padding: 25px 60px;
-      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 1.6em;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      box-shadow: 0 6px 20px rgba(44, 62, 80, 0.3);
-      border: 3px solid #d4af37;
-      letter-spacing: 1px;
-      margin-top: 20px;
-    }
-
-    .boton:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(44, 62, 80, 0.4);
-      background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
-      border-color: #f1c40f;
-    }
-
-    .boton:active {
-      transform: translateY(-1px);
-    }
-
     .decoracion {
       color: #d4af37;
       font-size: 2em;
@@ -174,6 +147,105 @@
       box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
     }
 
+    /* ========== CARRUSEL DE IMÁGENES ========== */
+    .titulo-carrusel {
+      color: #2c3e50;
+      font-size: 1.5em;
+      margin: 30px 0 20px 0;
+      font-weight: normal;
+      letter-spacing: 1px;
+    }
+
+    .carrusel-container {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      border: 4px solid #d4af37;
+      background: #2c3e50;
+    }
+
+    .carrusel-slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 650px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #2c3e50;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Controles del carrusel */
+    .carrusel-controles {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      padding: 0 15px;
+      z-index: 10;
+    }
+
+    .boton-carrusel {
+      background: rgba(44, 62, 80, 0.8);
+      color: white;
+      border: 2px solid #d4af37;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      font-size: 1.5em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .boton-carrusel:hover {
+      background: rgba(44, 62, 80, 1);
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+    }
+
+    /* Indicadores del carrusel */
+    .carrusel-indicadores {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .indicador-carrusel {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #bdc3c7;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .indicador-carrusel.activo {
+      background: #d4af37;
+      transform: scale(1.3);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    }
+
     @media (max-width: 600px) {
       .contenedor {
         padding: 40px 25px;
@@ -189,8 +261,13 @@
         min-height: 120px;
       }
 
-      .boton {
-        padding: 20px 40px;
+      .slide {
+        height: 500px;
+      }
+
+      .boton-carrusel {
+        width: 40px;
+        height: 40px;
         font-size: 1.3em;
       }
     }
@@ -216,15 +293,39 @@
     <div class="punto" data-index="5"></div>
   </div>
 
+  <p class="indicador">El mensaje cambia cada 4 segundos</p>
 
   <div class="decoracion">❋ ❋ ❋</div>
 
-  <a href="mensaje.html" class="boton">
-    👏 DIOS TE ENVIÓ ESTE MENSAJE ( por favor presionar)
-  </a>
+  <!-- CARRUSEL DE IMÁGENES -->
+  <h2 class="titulo-carrusel">📸 Galería de Invitaciones</h2>
+
+  <div class="carrusel-container">
+    <div class="carrusel-slides" id="carruselSlides">
+      <!-- Slide 1 -->
+      <div class="slide">
+        <img src="img/febrero/domingo_15.jpeg" alt="Moises - Servicio domimgo">
+      </div>
+      <!-- Slide 2 -->
+      <div class="slide">
+        <img src="img/febrero/domingo_15_mensaje.jpeg" alt="Mensaje">
+      </div>
+    </div>
+
+    <!-- Controles -->
+    <div class="carrusel-controles">
+      <button class="boton-carrusel" onclick="moverCarrusel(-1)">‹</button>
+      <button class="boton-carrusel" onclick="moverCarrusel(1)">›</button>
+    </div>
+  </div>
+
+  <!-- Indicadores -->
+  <div class="carrusel-indicadores" id="indicadoresCarrusel"></div>
+
 </div>
 
 <script>
+  // ========== MENSAJES ROTATIVOS ==========
   const mensajes = [
     "Dios te ama y tiene un plan maravilloso para tu vida",
     "La fe mueve montañas - Mateo 17:20",
@@ -265,6 +366,61 @@
 
   cambiarMensaje();
   setInterval(cambiarMensaje, 6000);
+
+  // ========== CARRUSEL DE IMÁGENES ==========
+  let indiceCarrusel = 0;
+  const carruselSlides = document.getElementById('carruselSlides');
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+
+  // Crear indicadores
+  function crearIndicadores() {
+    const contenedorIndicadores = document.getElementById('indicadoresCarrusel');
+    for (let i = 0; i < totalSlides; i++) {
+      const indicador = document.createElement('div');
+      indicador.className = 'indicador-carrusel';
+      if (i === 0) indicador.classList.add('activo');
+      indicador.onclick = () => irASlide(i);
+      contenedorIndicadores.appendChild(indicador);
+    }
+  }
+
+  // Actualizar indicadores
+  function actualizarIndicadores() {
+    const indicadores = document.querySelectorAll('.indicador-carrusel');
+    indicadores.forEach((ind, i) => {
+      ind.classList.toggle('activo', i === indiceCarrusel);
+    });
+  }
+
+  // Mover carrusel
+  function moverCarrusel(direccion) {
+    indiceCarrusel += direccion;
+
+    if (indiceCarrusel < 0) {
+      indiceCarrusel = totalSlides - 1;
+    }
+    if (indiceCarrusel >= totalSlides) {
+      indiceCarrusel = 0;
+    }
+
+    carruselSlides.style.transform = `translateX(-${indiceCarrusel * 100}%)`;
+    actualizarIndicadores();
+  }
+
+  // Ir a slide específico
+  function irASlide(indice) {
+    indiceCarrusel = indice;
+    carruselSlides.style.transform = `translateX(-${indiceCarrusel * 100}%)`;
+    actualizarIndicadores();
+  }
+
+  // Auto-avanzar cada 5 segundos
+  setInterval(() => moverCarrusel(1), 10000);
+
+  // Inicializar indicadores
+  crearIndicadores();
 </script>
 </body>
 </html>
+
