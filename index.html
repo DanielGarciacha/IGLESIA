@@ -299,16 +299,16 @@
 
   <!-- CARRUSEL DE IMÁGENES -->
   <h2 class="titulo-carrusel">📸 Galería de Invitaciones</h2>
-
+  
   <div class="carrusel-container">
     <div class="carrusel-slides" id="carruselSlides">
       <!-- Slide 1 -->
       <div class="slide">
-        <img src="img/febrero/domingo_15.jpeg" alt="Moises - Servicio domimgo">
+        <img src="img/febrero/domingo_15.jpeg" alt="Moises - Servicio Jovenes">
       </div>
       <!-- Slide 2 -->
       <div class="slide">
-        <img src="img/febrero/domingo_15_mensaje.jpeg" alt="Mensaje">
+        <img src="img/febrero/domingo_15_mensaje.jpeg" alt="Invitación 2">
       </div>
     </div>
 
@@ -365,7 +365,7 @@
   }
 
   cambiarMensaje();
-  setInterval(cambiarMensaje, 6000);
+  setInterval(cambiarMensaje, 4000);
 
   // ========== CARRUSEL DE IMÁGENES ==========
   let indiceCarrusel = 0;
@@ -396,14 +396,14 @@
   // Mover carrusel
   function moverCarrusel(direccion) {
     indiceCarrusel += direccion;
-
+    
     if (indiceCarrusel < 0) {
       indiceCarrusel = totalSlides - 1;
     }
     if (indiceCarrusel >= totalSlides) {
       indiceCarrusel = 0;
     }
-
+    
     carruselSlides.style.transform = `translateX(-${indiceCarrusel * 100}%)`;
     actualizarIndicadores();
   }
@@ -416,11 +416,10 @@
   }
 
   // Auto-avanzar cada 5 segundos
-  setInterval(() => moverCarrusel(1), 10000);
+  setInterval(() => moverCarrusel(1), 5000);
 
   // Inicializar indicadores
   crearIndicadores();
 </script>
 </body>
 </html>
-
